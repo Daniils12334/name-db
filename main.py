@@ -52,22 +52,45 @@ while True:
             for row in result:
                 print(row)
     elif choice == '3':
+        cursor.execute("SELECT * FROM names ORDER BY amount DESC LIMIT 5")
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
+
+        # SELECT TOP 5 * FROM names
+        # ORDER BY amount DESC
+
         # atlasīt top 5 vārdus pēc populāritātes
         # https://www.w3schools.com/sql/sql_orderby.asp (ORDER BY)
         # https://www.w3schools.com/sql/sql_top.asp (LIMIT)
         pass
     elif choice == '4':
         gender = input("Ievadi VĪRIETIS/SIEVIETE: ")
+        cursor.execute("SELECT COUNT(amount) FROM names WHERE gender=?;", (gender,))
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
+# SELECT COUNT(name)
+# FROM names
+# WHERE gender = ?;
         # Parādīt kopējo vārdu skaitu pēc dzimuma
         # https://www.w3schools.com/sql/sql_count.asp (COUNT)
         # https://www.w3schools.com/sql/sql_where.asp (WHERE)
     elif choice == '5':
         gender = input("Ievadi VĪRIETIS/SIEVIETE: ")
+        cursor.execute("SELECT AVG(amount) FROM names WHERE gender=?;", (gender,))
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
         # Parādīt vidējo vārdu skaitu pēc dzimuma
         # https://www.w3schools.com/sql/sql_avg.asp (AVG)
         # https://www.w3schools.com/sql/sql_where.asp (WHERE)
     elif choice == '6':
         amount = input("Ievadi daudzumu: ")
+        cursor.execute("SELECT name FROM names WHERE amount==?;", (amount,))
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
         # Parādīt vārdus pēc daudzuma
         # https://www.w3schools.com/sql/sql_where.asp (WHERE)
     elif choice == '7':
